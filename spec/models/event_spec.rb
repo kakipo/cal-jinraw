@@ -49,25 +49,46 @@ describe Event do
       end
     end
 
-    describe "event_date" do
-      before { @event.event_date = mod_event_date }
+    describe "start_at" do
+      before { @event.start_at = mod_start_at }
       context "when it is empty" do
-        let(:mod_event_date) { nil }
+        let(:mod_start_at) { nil }
         it { should_not be_valid }
       end
       context "when is is yesterday" do
-        let(:mod_event_date) { Date.yesterday }
+        let(:mod_start_at) { Date.yesterday }
         it { should_not be_valid }
       end
-      context "when is today" do
-        let(:mod_event_date) { Date.today }
+      context "when is 1hour later" do
+        let(:mod_start_at) { Time.now + 1.hour }
         it { should be_valid }
       end
       context "when is tomorrow" do
-        let(:mod_event_date) { Date.tomorrow }
+        let(:mod_start_at) { Date.tomorrow }
         it { should be_valid }
       end
     end
+
+    describe "end_at" do
+      before { @event.end_at = mod_end_at }
+      context "when it is empty" do
+        let(:mod_end_at) { nil }
+        it { should_not be_valid }
+      end
+      context "when is is yesterday" do
+        let(:mod_end_at) { Date.yesterday }
+        it { should_not be_valid }
+      end
+      context "when is 1hour later" do
+        let(:mod_end_at) { Time.now + 1.hour }
+        it { should be_valid }
+      end
+      context "when is tomorrow" do
+        let(:mod_end_at) { Date.tomorrow }
+        it { should be_valid }
+      end
+    end
+
 
     describe "place" do
       before { @event.place = mod_place }

@@ -19,41 +19,12 @@
             %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
             3／7 人狼やりましょうよ 【初心者大歓迎】
             %span 東京　13:00
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
+        - @events.each do |event|
+          %li
+            %a.eventDetail{href: "#event01"}
+              %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+              =event.title
+              %span="#{event.place} #{simple_datetime(event.start_at)}~#{simple_datetime(event.end_at)}"
       %p.text_right
         %a.aboutBtn{href: "#aboutBox"}
           %i.fa.fa-question>

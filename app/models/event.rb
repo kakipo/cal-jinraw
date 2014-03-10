@@ -9,10 +9,17 @@ class Event < ActiveRecord::Base
     presence: true,
     length: { maximum: 30 }
 
-  validates :event_date, 
+  validates :start_at, 
+    presence: true,
     timeliness: {
       :on_or_after => lambda { Date.current }, 
-      :type => :date
+      :type => :datetime
+    }
+
+  validates :end_at, 
+    timeliness: {
+      :on_or_after => lambda { Date.current }, 
+      :type => :datetime
     }
 
   validates :place,

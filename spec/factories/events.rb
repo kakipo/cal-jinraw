@@ -6,6 +6,7 @@ FactoryGirl.define do
     address "aaaaaaa"
     price 1000
     capacity 10
-    event_date Date.today
+    start_at Time.now
+    end_at Time.now
   end
 end

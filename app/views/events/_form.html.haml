@@ -10,8 +10,11 @@
     = f.label :url
     = f.text_field :url
   .field
-    = f.label :event_date
-    = f.date_select :event_date
+    = f.label :start_at
+    = f.datetime_select :start_at
+  .field
+    = f.label :end_at
+    = f.datetime_select :end_at
   .field
     = f.label :title
     = f.text_field :title
