@@ -18,11 +18,11 @@ test:
   pool: 5
   timeout: 5000
 
-production:
-  encoding: utf8  
-  adapter: postgresql  
-  port: 5432  
-  username: username  
-  host: your_host
-  database: your_database
-  password: your_password
+# production:
+#   encoding: utf8  
+#   adapter: postgresql  
+#   port: 5432  
+#   username: username  
+#   host: your_host
+#   database: your_database
+#   password: your_password
