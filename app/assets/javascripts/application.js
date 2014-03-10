@@ -13,3 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require clndr
+//= require jquery.colorbox-min
+//= require json2
+//= require moment-2.5.1
+//= require site
+//= require style
+//= require_tree .

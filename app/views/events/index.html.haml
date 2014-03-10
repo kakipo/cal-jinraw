@@ -1,42 +1,221 @@
-%h1 Listing events
-
-%table
-  %tr
-    %th Url
-    %th Event date
-    %th Title
-    %th Place
-    %th Address
-    %th Price
-    %th Capacity
-    %th Description
-    %th Session ID
-    %th
-    %th
-    %th
-
-  - @events.each do |event|
-    %tr
-      %td= event.url
-      %td= event.event_date
-      %td= event.title
-      %td= event.place
-      %td= event.address
-      %td= event.price
-      %td= event.capacity
-      %td= event.description
-      %td= event.session_id
-      %td= link_to 'Show', event
-      %td
-        -if my_event?(event)
-          = link_to 'Edit', edit_event_path(event)
-        -else
-          -
-      %td
-        -if my_event?(event)
-          = link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
-        -else
-          -
-%br
-
-= link_to 'New Event', new_event_path
+#header
+  #headerInner
+    %h1
+      %a{href: "/"}
+        %img{alt: "人狼イベントカレンダー", src: asset_path("logo.png")}
+#wrapper
+  .container
+    #cal
+    #eventList
+      %h2
+        %i.fa.fa-calendar
+        = succeed "\u{ff1a}" do
+          %span#date_val 今月のイベント
+        = succeed "\u{4ef6}" do
+          %span#eventCount 7
+      %ul
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+        %li
+          %a.eventDetail{href: "#event01"}
+            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            3／7 人狼やりましょうよ 【初心者大歓迎】
+            %span 東京　13:00
+      %p.text_right
+        %a.aboutBtn{href: "#aboutBox"}
+          %i.fa.fa-question>
+          \人狼イベントカレンダーとは？
+    %div
+    .displayNone
+      #event01.eventDetailBox
+        %h2 イベント詳細
+        %p.eventTitle
+          %img.favicon{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+          3／7 人狼やりましょうよ 【初心者大歓迎】
+        .date 2014年2月24日19:00
+        %h3
+          %i.fa.fa-building-o>
+          \会場
+        \ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+        %h3
+          %i.fa.fa-map-marker>
+          \住所
+        \ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+        %h3
+          %i.fa.fa-jpy>
+          \料金
+        \ここにテキスト
+        %h3
+          %i.fa.fa-users>
+          \定員
+        \ここにテキスト
+        %p
+          %a.editBtn{href: "#"}
+            %i.fa.fa-pencil>
+            \編集
+        %a.toEvent{href: "#", target: "_blank"} イベントの詳細を見る
+      #aboutBox
+        %h2 人狼イベントカレンダーについて
+        %p ここに説明ここに説明ここに説明ここに説明ここに説明
+      #searchBox
+        %h2
+          %i.fa.fa-search>
+          \条件で絞り込む
+        %h3
+          %i.fa.fa-map-marker>
+          \地域でしぼりこみ
+        %select{lang: "ja"}
+          %option{value: "北海道"} 北海道
+          %option{value: "青森県"} 青森県
+          %option{value: "岩手県"} 岩手県
+          %option{value: "宮城県"} 宮城県
+          %option{value: "秋田県"} 秋田県
+          %option{value: "山形県"} 山形県
+          %option{value: "福島県"} 福島県
+          %option{value: "茨城県"} 茨城県
+          %option{value: "栃木県"} 栃木県
+          %option{value: "群馬県"} 群馬県
+          %option{value: "埼玉県"} 埼玉県
+          %option{value: "千葉県"} 千葉県
+          %option{selected: "selected", value: "東京都"} 東京都
+          %option{value: "神奈川県"} 神奈川県
+          %option{value: "新潟県"} 新潟県
+          %option{value: "富山県"} 富山県
+          %option{value: "石川県"} 石川県
+          %option{value: "福井県"} 福井県
+          %option{value: "山梨県"} 山梨県
+          %option{value: "長野県"} 長野県
+          %option{value: "岐阜県"} 岐阜県
+          %option{value: "静岡県"} 静岡県
+          %option{value: "愛知県"} 愛知県
+          %option{value: "三重県"} 三重県
+          %option{value: "滋賀県"} 滋賀県
+          %option{value: "京都府"} 京都府
+          %option{value: "大阪府"} 大阪府
+          %option{value: "兵庫県"} 兵庫県
+          %option{value: "奈良県"} 奈良県
+          %option{value: "和歌山県"} 和歌山県
+          %option{value: "鳥取県"} 鳥取県
+          %option{value: "島根県"} 島根県
+          %option{value: "岡山県"} 岡山県
+          %option{value: "広島県"} 広島県
+          %option{value: "山口県"} 山口県
+          %option{value: "徳島県"} 徳島県
+          %option{value: "香川県"} 香川県
+          %option{value: "愛媛県"} 愛媛県
+          %option{value: "高知県"} 高知県
+          %option{value: "福岡県"} 福岡県
+          %option{value: "佐賀県"} 佐賀県
+          %option{value: "長崎県"} 長崎県
+          %option{value: "熊本県"} 熊本県
+          %option{value: "大分県"} 大分県
+          %option{value: "宮崎県"} 宮崎県
+          %option{value: "鹿児島県"} 鹿児島県
+          %option{value: "沖縄県"} 沖縄県
+        %h3
+          %i.fa.fa-jpy>
+          \値段でしぼりこみ
+        %select{lang: "ja"}
+          %option{value: "1000円以下"} 1000円以下
+          %option{value: "1001円〜2000円"} 1001円〜2000円
+          %option{value: "2001円〜3000円"} 2001円〜3000円
+          %option{value: "3001円以上"} 3001円以上
+        %h3
+          %i.fa.fa-search-plus>
+          \その他の条件でしぼりこみ
+        %label
+          %input{name: "etc", type: "checkbox", value: "bigginer"}/
+          \初心者OK
+        \　
+        %label
+          %input{name: "etc", type: "checkbox", value: "pro"}/
+          \玄人向け
+        \　
+        %label
+          %input{name: "etc", type: "checkbox", value: "allnight"}/
+          \平日開催
+        \　
+        %label
+          %input{name: "etc", type: "checkbox", value: "allnight"}/
+          \土日・祝日開催
+        \　
+        %label
+          %input{name: "etc", type: "checkbox", value: "allnight"}/
+          \オールナイト
+        .clear
+        %button{type: "submit"} この条件で検索
+      #addEvent
+        %h2
+          %i.fa.fa-arrow-circle-o-up>
+          \イベントを投稿
+        %h3
+          %i.fa.fa-link>
+          \イベントURL
+        %input{placeholder: "http://", type: "text"}/
+        %h3
+          %i.fa.fa-bell>
+          \イベントタイトル
+        %input{type: "text"}/
+        %h3
+          %i.fa.fa-building-o>
+          \会場名
+        %input{type: "text"}/
+        %h3
+          %i.fa.fa-map-marker>
+          \住所
+        %input{placeholder: "東京都渋谷区1−2−3", type: "text"}/
+        %h3
+          %i.fa.fa-jpy>
+          \料金
+        %input{placeholder: "1500円", type: "text"}/
+        %span.unit 円
+        %h3
+          %i.fa.fa-users>
+          \定員
+        %input{placeholder: "15名", type: "text"}/
+        %span.unit 名
+        %button{type: "submit"} イベントを投稿する
+#footer
+  #footerInner
+    %ul
+      %li.menuLeft
+        %a.searchBtn{href: "#searchBox"}
+          %i.fa.fa-search>
+          \条件で絞り込む
+      %li.menuRight
+        %a.addEventBtn{href: "#addEvent"}
+          %i.fa.fa-arrow-circle-o-up>
+          \イベントを投稿
