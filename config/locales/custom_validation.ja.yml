@@ -1,0 +1,7 @@
+ja:
+  errors:
+    messages:
+      at_most: "は多くとも%{count}個以下にしてください。"
+      at_leats: "は少なくとも%{count}個以上にしてください。"
+      uniq: "が重複しています"
+      invalid_url: "は不正なURL形式です。"

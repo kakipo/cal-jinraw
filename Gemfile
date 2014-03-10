@@ -52,6 +52,7 @@ gem "haml-rails"
 # gem "simple_form", git: "https://github.com/plataformatec/simple_form"
 gem "uuidtools"
 group :development do
+  gem "spring"
   gem "rspec-rails"
   gem "guard-rspec"
   gem "pry"
@@ -70,3 +71,6 @@ group :production do
   gem "rails_12factor"
   gem "pg"
 end
+
+
+gem 'validates_timeliness'

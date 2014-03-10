@@ -1,0 +1,16 @@
+ja:
+  errors:
+    messages:
+      invalid_date: "は不正な日付です。"
+      invalid_time: "は不正な時刻です。"
+      invalid_datetime: "は不正な日時です。"
+      is_at: "は%{restriction}で入入してください。"
+      before: "は%{restriction}より前を入力してください。"
+      on_or_before: "は%{restriction}以前で入力してください。"
+      after: "は%{restriction}より後を入力してください。"
+      on_or_after: "は%{restriction}以降を入力してください。"
+  validates_timeliness:
+    error_value_formats:
+      date: '%Y-%m-%d'
+      time: '%H:%M:%S'
+      datetime: '%Y-%m-%d %H:%M:%S'

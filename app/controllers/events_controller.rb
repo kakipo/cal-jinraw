@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    p "**** request.session_options[:id] = #{request.session_options[:id]}"
   end
 
   # GET /events/1
@@ -25,6 +26,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    @event.session_id = request.session_options[:id]
 
     respond_to do |format|
       if @event.save

@@ -10,6 +10,7 @@
     %th Price
     %th Capacity
     %th Description
+    %th Session ID
     %th
     %th
     %th
@@ -24,10 +25,18 @@
       %td= event.price
       %td= event.capacity
       %td= event.description
+      %td= event.session_id
       %td= link_to 'Show', event
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+      %td
+        -if my_event?(event)
+          = link_to 'Edit', edit_event_path(event)
+        -else
+          -
+      %td
+        -if my_event?(event)
+          = link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        -else
+          -
 %br
 
 = link_to 'New Event', new_event_path
