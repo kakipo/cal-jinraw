@@ -55,7 +55,7 @@ group :development do
   gem "rspec-rails"
   gem "guard-rspec"
   gem "pry"
-  gem "pry-debug"
+  # gem "pry-debugger"
 end
 
 group :test do
