@@ -2,6 +2,7 @@ ja:
   simple_form:
     labels:
       event:
+        categories: カテゴリ
     hints:
       event:
     placeholders:
@@ -9,7 +10,7 @@ ja:
         title: 初心者歓迎！渋谷で人狼！
         url: http://
         place: JELLY JELLY CAFE
-        address: 東京都渋谷区宇田川町10−2
+        address: 渋谷区宇田川町10−2
         price: 1500
         capacity: 15
     options:

@@ -7,5 +7,6 @@ FactoryGirl.define do
     price 1000
     capacity 10
     start_at DateTime.now
+    association :prefecture
   end
 end

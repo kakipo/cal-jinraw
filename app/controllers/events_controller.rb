@@ -1,3 +1,4 @@
+# coding: utf-8
 class EventsController < ApplicationController
 
   before_action :set_event, only: [:show, :edit, :update, :destroy]
@@ -31,8 +32,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event }
+        # format.html { render action: 'index' }
+        format.html { redirect_to root_path, notice: 'Event was successfully created.' }
+        # format.json { render action: 'show', status: :created, location: @event }
       else
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -75,6 +77,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:url, :event_date, :title, :place, :address, :price, :capacity, :start_at, :end_at)
+      params.require(:event).permit(:url, :event_date, :title, :place, :address, :price, :capacity, :start_at, :end_at, :prefecture_id, :cat_beginner_flg, :cat_pro_flg)
     end
 end

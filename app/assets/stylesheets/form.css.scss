@@ -4,9 +4,19 @@ form {
   }
   label {
     display: block;
+    &.boolean {
+      display: inline;
+    }
   }
   .field_with_errors {
     background-color: red;
+  }
+  .boolean.inline.right-margin {
+    margin-left: 0px !important;
+    margin-right: 10px;
+    input[type='checkbox'] {
+      margin-right: 3px;
+    }
   }
 }
 

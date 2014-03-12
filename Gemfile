@@ -75,3 +75,4 @@ end
 
 
 gem 'validates_timeliness'
+gem 'active_hash'

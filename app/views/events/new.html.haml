@@ -1,4 +1,4 @@
 %h2 
   %i.fa.fa-arrow-circle-o-up
   イベントを投稿
-= render 'form'
+= render :partial => "events/form", :locals => {:event => @event}

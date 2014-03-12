@@ -188,6 +188,14 @@ describe Event do
       end
     end
 
+    describe "prefecture" do
+      before { @event.prefecture = mod_prefecture }
+      context "when it is empty" do
+        let(:mod_prefecture) { nil }
+        it { should_not be_valid }
+      end
+    end
+
     describe "address" do
       before { @event.address = mod_address }
       context "when it is empty" do

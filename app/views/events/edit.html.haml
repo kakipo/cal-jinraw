@@ -1,6 +1,6 @@
 %h1 イベントを編集する
 
-= render 'form'
+= render :partial => "events/form", :locals => {:event => @event}
 
 = link_to 'Show', @event
 \|

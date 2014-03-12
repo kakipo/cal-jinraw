@@ -1,5 +1,8 @@
 class Event < ActiveRecord::Base
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :prefecture
+
   before_save   :set_cat_flags
 
   validates :url,
@@ -30,6 +33,9 @@ class Event < ActiveRecord::Base
   validates :place,
     presence: true,
     length: { maximum: 50 }
+
+  validates :prefecture,
+    presence: true
 
   validates :address,
     presence: true,

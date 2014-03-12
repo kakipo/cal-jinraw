@@ -10,6 +10,12 @@ ja:
         start_at: 開催日時
         end_at: 終了日時
         place: 会場名
+        prefecture: 都道府県
         address: 住所
         price: 参加費
         capacity: 定員
+        cat_pro_flg: 玄人向け
+        cat_beginner_flg: 初心者歓迎
+        cat_weekday_flg: 平日開催
+        cat_holyday_flg: 土日・祝日開催
+        cat_allnight_flg: オールナイト
