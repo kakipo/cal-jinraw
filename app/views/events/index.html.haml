@@ -9,10 +9,9 @@
     #eventList
       %h2
         %i.fa.fa-calendar
-        = succeed "\u{ff1a}" do
           %span#date_val 今月のイベント
-        = succeed "\u{4ef6}" do
-          %span#eventCount 7
+      %div#search-cond-container
+        全国/~1000円/初心者OK/土日・祝日開催
       %ul
         %li
           %a.eventDetail{href: "#event01"}
@@ -151,7 +150,9 @@
           \オールナイト
         .clear
         %button{type: "submit"} この条件で検索
+
       #addEvent
+        / =render :partial => "events/new_form"
         %h2
           %i.fa.fa-arrow-circle-o-up>
           \イベントを投稿

@@ -10,6 +10,77 @@ describe Event do
   #   it { should have_many(:user_companies).of_type(Userevent) }
   # end
 
+  describe "methods" do
+    before do
+      @event = FactoryGirl.build(:event)
+    end
+
+    describe "#is_holiday?" do
+      subject { @event.is_holiday? }
+      before { @event.start_at = mod_start_at }
+
+      context "when it is weekday (Monday)" do
+        let(:mod_start_at) { DateTime.new(2014,3,10) }
+        it { should be_false }
+      end
+
+      context "when it is holiday (Saturday)" do
+        let(:mod_start_at) { DateTime.new(2014,3,15) }
+        it { should be_true }
+      end
+
+      context "when it is holiday (Sunday)" do
+        let(:mod_start_at) { DateTime.new(2014,3,16) }
+        it { should be_true }
+      end
+
+      context "when it is holiday (National Holiday)" do
+        let(:mod_start_at) { DateTime.new(2014,3,21) }
+        it { should be_true }
+      end
+    end
+
+    describe "#is_allnight?" do
+      subject { @event.is_allnight? }
+      before do 
+        @event.start_at = mod_start_at 
+        @event.end_at = mod_end_at 
+      end
+
+      context "when end_at is blank" do
+        let(:mod_start_at) { DateTime.new(2014,3,10,15,30,50) }
+        let(:mod_end_at) { nil }
+        it { should be_false }
+      end
+
+      context "when it starts at afternoon and ends at night" do
+        let(:mod_start_at) { DateTime.new(2014,3,10,13,30,50) }
+        let(:mod_end_at) { DateTime.new(2014,3,10,19,30,50) }
+        it { should be_true }
+      end
+
+      context "when over a day" do
+        let(:mod_start_at) { DateTime.new(2014,3,10,15,30,50) }
+        let(:mod_end_at) { DateTime.new(2014,3,11,0,0,0) }
+        it { should be_true }
+      end
+
+      context "when over a day" do
+        let(:mod_start_at) { DateTime.new(2014,3,10,15,30,50) }
+        let(:mod_end_at) { DateTime.new(2014,3,11,0,0,0) }
+        it { should be_true }
+      end
+
+      context "when it starts at midninght" do
+        let(:mod_start_at) { DateTime.new(2014,3,10,2,30,50) }
+        let(:mod_end_at) { DateTime.new(2014,3,10,7,30,0) }
+        it { should be_true }
+      end
+
+    end
+
+  end
+
   describe "properties" do
     before do
       @event = FactoryGirl.build(:event)
@@ -55,36 +126,47 @@ describe Event do
         let(:mod_start_at) { nil }
         it { should_not be_valid }
       end
-      context "when is is yesterday" do
-        let(:mod_start_at) { Date.yesterday }
+      context "when it is TOO EARLY" do
+        let(:mod_start_at) { DateTime.new(1984,7,22) }
         it { should_not be_valid }
       end
-      context "when is 1hour later" do
-        let(:mod_start_at) { Time.now + 1.hour }
+      context "when it MIN" do
+        let(:mod_start_at) { DateTime.new(1984,7,23) }
         it { should be_valid }
       end
-      context "when is tomorrow" do
-        let(:mod_start_at) { Date.tomorrow }
+      context "when is VALID value" do
+        let(:mod_start_at) { DateTime.now }
+        it { should be_valid }
+      end
+      context "when it is TOO AFTER" do
+        let(:mod_start_at) { DateTime.new(2084,7,24) }
+        it { should_not be_valid }
+      end
+      context "when it MAX" do
+        let(:mod_start_at) { DateTime.new(2084,7,23) - 1.day }
         it { should be_valid }
       end
     end
 
     describe "end_at" do
-      before { @event.end_at = mod_end_at }
+      before do 
+        @event.start_at = DateTime.now
+        @event.end_at = mod_end_at 
+      end
       context "when it is empty" do
         let(:mod_end_at) { nil }
-        it { should_not be_valid }
-      end
-      context "when is is yesterday" do
-        let(:mod_end_at) { Date.yesterday }
-        it { should_not be_valid }
-      end
-      context "when is 1hour later" do
-        let(:mod_end_at) { Time.now + 1.hour }
         it { should be_valid }
       end
-      context "when is tomorrow" do
-        let(:mod_end_at) { Date.tomorrow }
+      context "when it is BEFORE start_at" do
+        let(:mod_end_at) { @event.start_at - 1.hour }
+        it { should_not be_valid }
+      end
+      context "when is SAME as start_at" do
+        let(:mod_end_at) { @event.start_at }
+        it { should be_valid }
+      end
+      context "when is AFTER start_at" do
+        let(:mod_end_at) { @event.start_at + 1.hour }
         it { should be_valid }
       end
     end

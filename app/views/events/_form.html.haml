@@ -1,37 +1,13 @@
-= form_for @event do |f|
-  - if @event.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
-      %ul
-        - @event.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :url
-    = f.text_field :url
-  .field
-    = f.label :start_at
-    = f.datetime_select :start_at
-  .field
-    = f.label :end_at
-    = f.datetime_select :end_at
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :place
-    = f.text_field :place
-  .field
-    = f.label :address
-    = f.text_field :address
-  .field
-    = f.label :price
-    = f.number_field :price
-  .field
-    = f.label :capacity
-    = f.number_field :capacity
-  .field
-    = f.label :description
-    = f.text_area :description
-  .actions
-    = f.submit 'Save'
+.event-form-container
+  .notice= notice
+  - t = I18n.t("activerecord.attributes.event")
+  = simple_form_for event, :remote => true, :'data-type' => :html do |f|
+    = f.input :url, label: fa_tag("fa-link") + t[:url]
+    = f.input :title, label: fa_tag("fa-bell") + t[:title]
+    = f.input :start_at, label: fa_tag("fa-clock-o") + t[:start_at], as: :datetime_local
+    = f.input :end_at, label: fa_tag("fa-clock-o") + t[:end_at], as: :datetime_local
+    = f.input :place, label: fa_tag("fa-building-o") + t[:place]
+    = f.input :address, label: fa_tag("fa-map-marker") + t[:address]
+    = f.input :price, label: fa_tag("fa-jpy") + t[:price]
+    = f.input :capacity, label: fa_tag("fa-users") + t[:capacity]
+    = f.button :submit

@@ -87,8 +87,7 @@ blockquote, dd, div, dl, dt, h1, h2, h3, h4, h5, h6, li, ol, p, pre, span, td, t
   padding: 0;
 }
 
-p {
-}
+p {}
 
 caption, th {
   text-align: left;
@@ -485,7 +484,7 @@ img.favicon {
   font-size: 14px;
 }
 
-#aboutBox p{
+#aboutBox p {
   margin-bottom: 0.8em;
 }
 
@@ -518,6 +517,7 @@ img.favicon {
   max-width: 210px;
   min-width: 40%;
 }
+
 #addEvent input[type="checkbox"] {
   min-width: 10px;
 }

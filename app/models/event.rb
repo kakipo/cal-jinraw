@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
 
+  before_save   :set_cat_flags
+
   validates :url,
     presence: true,
     url: true,
@@ -12,13 +14,16 @@ class Event < ActiveRecord::Base
   validates :start_at, 
     presence: true,
     timeliness: {
-      :on_or_after => lambda { Date.current }, 
+      :on_or_after => '1984/07/23',
+      :on_or_before => '2084/07/23',
       :type => :datetime
     }
 
   validates :end_at, 
     timeliness: {
-      :on_or_after => lambda { Date.current }, 
+      :allow_blank => true,
+      :on_or_after => :start_at,
+      :on_or_before => '2084/07/23',
       :type => :datetime
     }
 
@@ -46,6 +51,24 @@ class Event < ActiveRecord::Base
       less_than_or_equal_to: 999
     }
 
+  def set_cat_flags
+    self.cat_weekday_flg = !self.is_holiday?
+    self.cat_holiday_flg = self.is_holiday?
+    self.cat_allnight_flg = self.is_allnight?
+  end
 
+  def is_holiday?
+    self.start_at.saturday? or self.start_at.sunday? or self.start_at.to_date.national_holiday?
+  end
+
+  # オールナイトイベント？
+  def is_allnight?
+    return false if self.end_at.blank?
+
+    is_over_day = (self.end_at - self.start_at) > 0
+    start_at_midnight = self.start_at < self.start_at.midnight + 4.hour
+
+    return (is_over_day or start_at_midnight)
+  end
 
 end

@@ -3,8 +3,7 @@ require 'active_support/inflector'
 # More info at https://github.com/guard/guard#readme
 
 # spring 使ってると読み込んでくれない・・・
-guard 'rspec', :spring => true do
-#guard 'rspec' do
+guard :rspec, cmd: 'spring rspec -f doc' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

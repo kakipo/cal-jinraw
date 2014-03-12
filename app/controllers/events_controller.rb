@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -42,13 +43,15 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        # format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        flash.now[:notice] = "イベントが更新されました"
+        format.html { render action: 'edit', layout: false}
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        # format.html { render action: 'edit' }
+        format.html { render action: 'edit', layout: false}
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end

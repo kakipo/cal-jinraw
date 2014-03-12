@@ -1,0 +1,56 @@
+form {
+  abbr[title='required'] {
+    display: none;
+  }
+  label {
+    display: block;
+  }
+  .field_with_errors {
+    background-color: red;
+  }
+}
+
+
+.event-form-container {
+  text-align: left;
+  padding: 5px;
+  font-size: 20px;
+  label {
+    font-size: 16px;
+    color: #663300;
+    font-weight: bold;
+    margin-bottom: 8px;
+    i {
+      margin-right: 5px;
+    }
+  }
+  input {
+    margin-bottom: 22px;
+    max-width: 210px;
+    min-width: 40%;
+  }
+  select {
+    margin-bottom: 22px;
+  }
+  span.unit {
+    margin-left: 8px;
+    font-size: 14px;
+  }
+  input.button {
+    text-align: center;
+    display: block;
+    margin: 30px auto 0;
+    width: 80%;
+    border: none;
+    background: #663300;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 15px;
+    border-radius: 28px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
