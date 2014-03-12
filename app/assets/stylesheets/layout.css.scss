@@ -88,7 +88,6 @@ blockquote, dd, div, dl, dt, h1, h2, h3, h4, h5, h6, li, ol, p, pre, span, td, t
 }
 
 p {
-  word-break: break-all;
 }
 
 caption, th {
@@ -486,6 +485,10 @@ img.favicon {
   font-size: 14px;
 }
 
+#aboutBox p{
+  margin-bottom: 0.8em;
+}
+
 #aboutBox h2,
 #searchBox h2,
 #addEvent h2,
@@ -703,7 +706,7 @@ img.favicon {
 }
 
 #cboxLoadedContent {
-  margin-bottom: 20px;
+  margin-bottom: 2px;
 }
 
 #cboxTitle {
