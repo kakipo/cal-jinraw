@@ -515,6 +515,9 @@ img.favicon {
   max-width: 210px;
   min-width: 40%;
 }
+#addEvent input[type="checkbox"] {
+  min-width: 10px;
+}
 
 #addEvent span.unit {
   margin-left: 8px;
