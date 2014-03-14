@@ -3,6 +3,32 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on("ready pjax:success", () ->
+
+  do () ->
+    $(".aboutBtn").colorbox({
+      returnFocus:false,
+      inline:true,
+      width:"98%"
+    })
+
+    $(".searchBtn").colorbox({
+      returnFocus:false,
+      inline:true,
+      width:"98%"
+    })
+
+    $(".addEventBtn").colorbox({
+      returnFocus:false,
+      inline:true,
+      width:"98%"
+    })
+
+    $(".eventDetail").colorbox({
+      returnFocus:false,
+      inline:true,
+      width:"98%"
+    })
+
   do () ->
     $("#cal").datepicker({
         onSelect: (dateText, inst) ->

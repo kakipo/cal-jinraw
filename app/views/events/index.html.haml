@@ -1,26 +1,21 @@
-#header
-  #headerInner
+%div#header
+  %div#headerInner
     %h1
       %a{href: "/"}
         %img{alt: "人狼イベントカレンダー", src: asset_path("logo.png")}
-#wrapper
-  .container
-    #cal
-    #eventList
+%div#wrapper
+  %div.container
+    %div#cal
+    %div#eventList
       %h2
         %i.fa.fa-calendar
           %span#date_val 今月のイベント
       %div#search-cond-container
         全国/~1000円/初心者OK/土日・祝日開催
       %ul
-        %li
-          %a.eventDetail{href: "#event01"}
-            %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-            3／7 人狼やりましょうよ 【初心者大歓迎】
-            %span 東京　13:00
         - @events.each do |event|
           %li
-            %a.eventDetail{href: "#event01"}
+            %a.eventDetail{href: "#event-#{event.id}"}
               %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
               =event.title
               %span
@@ -34,34 +29,38 @@
           %i.fa.fa-question>
           \人狼イベントカレンダーとは？
     %div
-    .displayNone
-      #event01.eventDetailBox
-        %h2 イベント詳細
-        %p.eventTitle
-          %img.favicon{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
-          3／7 人狼やりましょうよ 【初心者大歓迎】
-        .date 2014年2月24日19:00
-        %h3
-          %i.fa.fa-building-o>
-          \会場
-        \ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-        %h3
-          %i.fa.fa-map-marker>
-          \住所
-        \ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-        %h3
-          %i.fa.fa-jpy>
-          \料金
-        \ここにテキスト
-        %h3
-          %i.fa.fa-users>
-          \定員
-        \ここにテキスト
-        %p
-          %a.editBtn{href: "#"}
-            %i.fa.fa-pencil>
-            \編集
-        %a.toEvent{href: "#", target: "_blank"} イベントの詳細を見る
+    %div.displayNone
+      - @events.each do |event|
+        %div.eventDetailBox{id: "event-#{event.id}"}
+          %h2 イベント詳細
+          %p.eventTitle
+            %img.favicon{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            =event.title
+          %div.date=event.start_at
+          %h3
+            %i.fa.fa-building-o
+            会場
+          =event.place
+          %h3
+            %i.fa.fa-map-marker
+            住所
+          =event.address
+          %h3
+            %i.fa.fa-jpy
+            料金
+          =event.price
+          円
+          %h3
+            %i.fa.fa-users
+            定員
+          =event.capacity
+          人
+          %p
+            %a.editBtn{href: "#"}
+              %i.fa.fa-pencil>
+              \編集
+          %a.toEvent{href: event.url, target: "_blank"} イベントの詳細を見る
+
       #aboutBox
         %h2 人狼イベントカレンダーについて
         %p 人狼イベントを探す、教える、告知する。人狼のイベントを見逃さない為の「人狼イベントカレンダー」です。

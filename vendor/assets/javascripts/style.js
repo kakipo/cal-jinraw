@@ -1,28 +1,3 @@
-$(document).ready(function(){
-$(".aboutBtn").colorbox({
-        returnFocus:false,
-        inline:true,
-        width:"98%"
-        });
-$(".searchBtn").colorbox({
-        returnFocus:false,
-        inline:true,
-        width:"98%"
-        });
-$(".addEventBtn").colorbox({
-        returnFocus:false,
-        inline:true,
-        width:"98%"
-        });
-
-$(".eventDetail").colorbox({
-        returnFocus:false,
-        inline:true,
-        width:"98%"
-        });
-});
-
-
 /*! jQuery UI - v1.10.4 - 2014-01-17
 * http://jqueryui.com
 * Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
