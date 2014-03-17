@@ -7,6 +7,11 @@ window.kufu.cal = {}
 
 kufu.IMG_BASE_URL = "assets"
 
+
+# date 取得用関数
+kufu.cal.getSelectedDate = () ->
+  $.format.date($('#cal').datepicker('getDate'), 'yyyy-MM-dd')
+
 # カレンダーアイコンの設定
 # $eventDOMs: jQuery Objects on a day
 kufu.cal.createIconClasses = ($eventDOMs) ->
@@ -51,13 +56,13 @@ kufu.cal.replaceBGImg = ($dom, position, iconName) ->
 #
 # selectedDate: yyyy-mm-dd
 kufu.cal.drawCalList = (selectedDate) ->
+  $("#date_val").html(selectedDate + "のイベント")
   $("#eventList ul li").addClass("hidden")
   $("#eventList ul li.ed-" + selectedDate + "[data-filtered=false]").removeClass("hidden")
 
 
 # カレンダーの設定
 kufu.cal.initDatepicker = () ->
-  console.log "init datepicker"
   $("#cal").datepicker({
     showOtherMonths: true,
     selectOtherMonths: true,
@@ -68,7 +73,7 @@ kufu.cal.initDatepicker = () ->
         $(this).datepicker('setDate', "#{year}/#{fmtMonth}/01")
     ,
     onSelect: (selectedDate, ui) ->
-      $("#date_val").html(selectedDate + "のイベント")
+     
       if ui.drawMonth < ui.currentMonth
         $(this).find(".ui-datepicker-next").click()
       else if ui.currentMonth < ui.drawMonth
@@ -111,6 +116,10 @@ kufu.cal.initDatepicker = () ->
         bg = $(this).attr("data-css-background-image")
         $(this).css("background-image", bg)
       )
+
+      # 描画
+      d = kufu.cal.getSelectedDate()
+      kufu.cal.drawCalList(d)
   })
 
 
