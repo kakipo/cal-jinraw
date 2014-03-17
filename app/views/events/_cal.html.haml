@@ -11,10 +11,11 @@
         %i.fa.fa-calendar
           %span#date_val 今月のイベント
       %div#search-cond-container
-        全国/~1000円/初心者OK/土日・祝日開催
+        %span.title 現在の絞込条件（and検索）:
+        %span.content なし
       %ul
         - @events.each do |event|
-          %li.hidden{:"class" => "ed-#{event.start_at.strftime('%Y-%m-%d')}", :"data-id" => event.id, :"data-icon-type" => icon_type(event.url)}
+          %li.hidden{:"class" => "ed-#{event.start_at.strftime('%Y-%m-%d')}", :"data-id" => event.id, :"data-icon-type" => icon_type(event.url), :"data-filtered" => "false", :"data-price-range-id" => price_range_id(event.price), :"data-pref-id" => event.prefecture.id}
             %a.eventDetail{:href => "#event-#{event.id}"}
               %img{src: asset_path("icon-#{icon_type(event.url)}.png")}>/
               =event.title
@@ -76,20 +77,17 @@
         %h3
           %i.fa.fa-map-marker>
           \地域でしぼりこみ
-        %select{lang: "ja"}
-          %option{value: "null"} 未選択
+        %select#js-filter-pref-id{lang: "ja"}
+          %option{value: "na"} 全国
           - Prefecture.all.each do |pref|
             %option{value: pref.id}=pref.name
         %h3
           %i.fa.fa-jpy>
-          \値段でしぼりこみ
-        %select{lang: "ja"}
-          %option{value: "null"} 未選択
-          %option{value: "0"} 無料
-          %option{value: "<=1000"} 〜1000円
-          %option{value: "<=2000"} 〜2000円
-          %option{value: "<=3000"} 〜3000円
-          %option{value: "3001<="} 3001円〜
+          \参加費でしぼりこみ
+        %select#js-filter-price-range-id{lang: "ja"}
+          %option{value: "na"} 参加費問わず
+          - PriceRange.all.each do |pr|
+            %option{value: pr.id}=pr.name
         %h3
           %i.fa.fa-search-plus>
           \その他の条件でしぼりこみ
@@ -113,7 +111,7 @@
           %input{name: "etc", type: "checkbox", value: "allnight"}/
           \オールナイト
         .clear
-        %button{type: "submit"} この条件で絞り込む
+        %button#js-do-filter{type: "submit"} この条件で絞り込む
 
       #addEvent
         =render :partial => "events/new_form", :locals => {:new_event => new_event}

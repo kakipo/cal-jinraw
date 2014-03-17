@@ -7,7 +7,6 @@ window.kufu.cal = {}
 
 kufu.IMG_BASE_URL = "assets"
 
-
 # カレンダーアイコンの設定
 # $eventDOMs: jQuery Objects on a day
 kufu.cal.createIconClasses = ($eventDOMs) ->
@@ -49,8 +48,66 @@ kufu.cal.replaceBGImg = ($dom, position, iconName) ->
 # selectedDate: yyyy-mm-dd
 kufu.cal.drawCalList = (selectedDate) ->
   $("#eventList ul li").addClass("hidden")
-  $("#eventList ul li.ed-" + selectedDate).removeClass("hidden")
+  $("#eventList ul li.ed-" + selectedDate + "[data-filtered=false]").removeClass("hidden")
 
+
+# カレンダーの設定
+kufu.cal.initDatepicker = () ->
+  console.log "init datepicker"
+  $("#cal").datepicker({
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    onChangeMonthYear: (year, month, ui) ->
+      # 初日を選択状態とする
+      fmtMonth = (if month < 10 then "0#{month}" else month)
+      if ui.drawMonth != ui.currentMonth
+        $(this).datepicker('setDate', "#{year}/#{fmtMonth}/01")
+    ,
+    onSelect: (selectedDate, ui) ->
+      $("#date_val").html(selectedDate + "のイベント")
+      if ui.drawMonth < ui.currentMonth
+        $(this).find(".ui-datepicker-next").click()
+      else if ui.currentMonth < ui.drawMonth
+        $(this).find(".ui-datepicker-prev").click()
+
+      fmtDate = selectedDate.replace(/\//g, "-")
+      kufu.cal.drawCalList(fmtDate)
+    ,
+    beforeShowDay: (date) ->
+      console.log "beforeShowDay"
+      classNames = []
+      if date.getDay() == 0
+        # 日曜日
+        classNames.push("ui-datepicker-sunday_feteday")
+      else if date.getDay() == 1
+        classNames.push("icon-facebook")
+      else if date.getDay() == 6
+          # 土曜日
+        classNames.push("ui-datepicker-saturday")
+
+      fmtDate = $.format.date(date, 'yyyy-MM-dd')
+
+      $eventDOMs = $("#eventList li.ed-#{fmtDate}[data-filtered=false]")
+
+      classNames = classNames.concat(kufu.cal.createIconClasses($eventDOMs))
+
+      return [true, classNames.join(" ")];
+    ,
+    afterShow: () ->
+      console.log "afterShow"
+      # Android OS 2.3.X 対応
+      #   $(...).css("background-image") で複数指定した値を取得した際に、
+      #   最初の値のみしか取得できない問題への対応
+      $dates = $(".ui-datepicker-calendar td a.ui-state-default")
+      $dates.attr("data-css-background-image", "url(\"#{kufu.IMG_BASE_URL}/dummy-left.png\"), url(\"#{kufu.IMG_BASE_URL}/dummy-center.png\"), url(\"#{kufu.IMG_BASE_URL}/dummy-right.png\")")
+
+      kufu.cal.setIcons()
+
+      $dates.each(() ->
+        bg = $(this).attr("data-css-background-image")
+        $(this).css("background-image", bg)
+      )
+  })
 
 
 
@@ -96,60 +153,8 @@ $(document).on("ready pjax:success", () ->
     $(".addEventBtn").click()
 
 
-  # カレンダーの設定
   do () ->
-    $("#cal").datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true,
-      onChangeMonthYear: (year, month, ui) ->
-        # 初日を選択状態とする
-        fmtMonth = (if month < 10 then "0#{month}" else month)
-        if ui.drawMonth != ui.currentMonth
-          $(this).datepicker('setDate', "#{year}/#{fmtMonth}/01")
-      ,
-      onSelect: (selectedDate, ui) ->
-        $("#date_val").html(selectedDate + "のイベント")
-        if ui.drawMonth < ui.currentMonth
-          $(this).find(".ui-datepicker-next").click()
-        else if ui.currentMonth < ui.drawMonth
-          $(this).find(".ui-datepicker-prev").click()
-
-        fmtDate = selectedDate.replace(/\//g, "-")
-        kufu.cal.drawCalList(fmtDate)
-      ,
-      beforeShowDay: (date) ->
-        classNames = []
-        if date.getDay() == 0
-          # 日曜日
-          classNames.push("ui-datepicker-sunday_feteday")
-        else if date.getDay() == 1
-          classNames.push("icon-facebook")
-        else if date.getDay() == 6
-            # 土曜日
-          classNames.push("ui-datepicker-saturday")
-
-        fmtDate = $.format.date(date, 'yyyy-MM-dd')
-        $eventDOMs = $("#eventList li.ed-#{fmtDate}")
-
-        classNames = classNames.concat(kufu.cal.createIconClasses($eventDOMs))
-
-        return [true, classNames.join(" ")];
-      ,
-      afterShow: () ->
-        console.log "afterShow"
-        # Android OS 2.3.X 対応
-        #   $(...).css("background-image") で複数指定した値を取得した際に、
-        #   最初の値のみしか取得できない問題への対応
-        $dates = $(".ui-datepicker-calendar td a.ui-state-default")
-        $dates.attr("data-css-background-image", "url(\"#{kufu.IMG_BASE_URL}/dummy-left.png\"), url(\"#{kufu.IMG_BASE_URL}/dummy-center.png\"), url(\"#{kufu.IMG_BASE_URL}/dummy-right.png\")")
-
-        kufu.cal.setIcons()
-
-        $dates.each(() ->
-          bg = $(this).attr("data-css-background-image")
-          $(this).css("background-image", bg)
-        )
-    })
+    kufu.cal.initDatepicker()
 
   do () ->
     $(document)
@@ -161,6 +166,36 @@ $(document).on("ready pjax:success", () ->
         # console.log res
         $('body').html(res)
       )
+
+
+  # 絞込フォームの設定
+  do () ->
+    $("#js-do-filter").click(()->
+      prefId = $("#js-filter-pref-id").val()
+      priceRangeId = $("#js-filter-price-range-id").val()
+
+      console.log "do filter, prefId=#{prefId}, priceRangeId=#{priceRangeId}"
+
+      $("#eventList ul li").attr("data-filtered", true)
+      $available = $("#eventList ul li")
+      unless prefId == "na"
+        $available = $available.filter("[data-pref-id=" + prefId + "]")
+      unless priceRangeId == "na"
+        $available = $available.filter("[data-price-range-id=" + priceRangeId + "]")
+
+
+      # 絞込条件の表示
+      prefTxt = $("#js-filter-pref-id option:selected").text()
+      priceRangeTxt = $("#js-filter-price-range-id option:selected").text()
+      $("#search-cond-container span.content").text("#{prefTxt}/#{priceRangeTxt}")
+
+      # datepicker をリフレッシュしてモーダルを閉じる
+      $available.attr("data-filtered", false)
+      $("#cal").datepicker("refresh")
+      $("#cboxClose").click()
+    )
+
+
 ) # end of onready function
 
 
