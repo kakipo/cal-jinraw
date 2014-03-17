@@ -62,6 +62,10 @@
             %a.editBtn{href: edit_event_path(event)}
               %i.fa.fa-pencil>
               \編集
+            %a.editBtn{href: event_path(event), :"data-method" => :delete, :"data-confirm" => "削除してもよろしいですか？"}
+              %i.fa.fa-pencil>
+              \削除
+
           %a.toEvent{href: event.url, target: "_blank"} イベントの詳細を見る
 
       #aboutBox
