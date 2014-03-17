@@ -6,6 +6,9 @@
 %div#wrapper
   %div.container
     %div#cal
+      - @events.each do |event|
+        -# JS で利用するための DOM
+        %span.event-data.hidden{:"data-id" => event.id, :"data-url" => event.url, :"data-date" => event.start_at.strftime("%Y-%m-%d") }
     %div#eventList
       %h2
         %i.fa.fa-calendar
