@@ -20,6 +20,8 @@ kufu.cal.createIconClasses = ($eventDOMs) ->
   for iconName in ["facebook", "mixi", "twipla", "tweetvite", "dummy"]
     if 0 < $eventDOMs.filter("[data-icon-type=" + iconName + "]").size()
       classNames.push("js-datepicker-icon-" + iconName)
+  if 3 < $eventDOMs.size()
+    classNames.push("js-datepicker-icon-plus")
 
   return classNames
 
@@ -37,9 +39,11 @@ kufu.cal.setIcons = () ->
   $(".js-datepicker-icon-tweetvite").each(()->
     kufu.cal.replaceBGImg($(this), "left", "icon-tweetvite")
   )
-
   $(".js-datepicker-icon-dummy").each(()->
     kufu.cal.replaceBGImg($(this), "center", "icon-dummy")
+  )
+  $(".js-datepicker-icon-plus").each(()->
+    kufu.cal.replaceBGImg($(this), "right", "icon-plus")
   )
 
 # Android OS 2.3.X 対応

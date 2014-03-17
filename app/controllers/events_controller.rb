@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @events = Event.all
+    @events = Event.all.order_by(start_at: 1)
     @new_event = Event.new
   end
 
