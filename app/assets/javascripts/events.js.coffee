@@ -29,6 +29,10 @@ kufu.cal.setIcons = () ->
   $(".js-datepicker-icon-mixi").each(()->
     kufu.cal.replaceBGImg($(this), "left", "icon-mixi")
   )
+  $(".js-datepicker-icon-tweetvite").each(()->
+    kufu.cal.replaceBGImg($(this), "left", "icon-tweetvite")
+  )
+
   $(".js-datepicker-icon-dummy").each(()->
     kufu.cal.replaceBGImg($(this), "center", "icon-dummy")
   )
@@ -171,18 +175,33 @@ $(document).on("ready pjax:success", () ->
   # 絞込フォームの設定
   do () ->
     $("#js-do-filter").click(()->
+
+      # 絞込の実施
       prefId = $("#js-filter-pref-id").val()
       priceRangeId = $("#js-filter-price-range-id").val()
-
-      console.log "do filter, prefId=#{prefId}, priceRangeId=#{priceRangeId}"
+      beginnerFlg = $("#js-filter-beginner-flg").prop("checked")
+      proFlg = $("#js-filter-pro-flg").prop("checked")
+      weekdayFlg = $("#js-filter-weekday-flg").prop("checked")
+      holidayFlg = $("#js-filter-holiday-flg").prop("checked")
+      allnightFlg = $("#js-filter-allnight-flg").prop("checked")
 
       $("#eventList ul li").attr("data-filtered", true)
       $available = $("#eventList ul li")
+
       unless prefId == "na"
         $available = $available.filter("[data-pref-id=" + prefId + "]")
       unless priceRangeId == "na"
         $available = $available.filter("[data-price-range-id=" + priceRangeId + "]")
-
+      if beginnerFlg
+        $available = $available.filter("[data-beginner-flg=" + beginnerFlg + "]")
+      if proFlg
+        $available = $available.filter("[data-pro-flg=" + proFlg + "]")
+      if weekdayFlg
+        $available = $available.filter("[data-weekday-flg=" + weekdayFlg + "]")
+      if holidayFlg
+        $available = $available.filter("[data-holiday-flg=" + holidayFlg + "]")
+      if allnightFlg
+        $available = $available.filter("[data-allnight-flg=" + allnightFlg + "]")
 
       # 絞込条件の表示
       prefTxt = $("#js-filter-pref-id option:selected").text()
