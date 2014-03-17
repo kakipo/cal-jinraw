@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require clndr
 //= require jquery.colorbox-min
 //= require json2

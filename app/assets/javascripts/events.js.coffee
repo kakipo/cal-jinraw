@@ -125,9 +125,6 @@ kufu.cal.initDatepicker = () ->
   })
 
 
-
-
-
 $(document).on("ready pjax:success", () ->
 
   do () ->
