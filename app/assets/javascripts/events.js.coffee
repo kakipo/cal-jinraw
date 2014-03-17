@@ -9,13 +9,13 @@ kufu.IMG_BASE_URL = "assets"
 
 
 # カレンダーアイコンの設定
-# $dayData: jQuery Objects on a day
-kufu.cal.createIconClasses = ($dayData) ->
+# $eventDOMs: jQuery Objects on a day
+kufu.cal.createIconClasses = ($eventDOMs) ->
   classNames = []
 
-  if 0 < $dayData.size()
-    classNames.push("js-datepicker-icon-facebook")
-    classNames.push("js-datepicker-icon-twitter")
+  for iconName in ["facebook", "mixi", "twipla", "tweetvite", "dummy"]
+    if 0 < $eventDOMs.filter("[data-icon-type=" + iconName + "]").size()
+      classNames.push("js-datepicker-icon-" + iconName)
 
   return classNames
 
@@ -27,8 +27,11 @@ kufu.cal.setIcons = () ->
   $(".js-datepicker-icon-facebook").each(()->
     kufu.cal.replaceBGImg($(this), "left", "icon-facebook")
   )
-  $(".js-datepicker-icon-twitter").each(()->
-    kufu.cal.replaceBGImg($(this), "center", "icon-twitter")
+  $(".js-datepicker-icon-mixi").each(()->
+    kufu.cal.replaceBGImg($(this), "left", "icon-mixi")
+  )
+  $(".js-datepicker-icon-dummy").each(()->
+    kufu.cal.replaceBGImg($(this), "center", "icon-dummy")
   )
 
 # Android OS 2.3.X 対応
@@ -45,11 +48,9 @@ kufu.cal.replaceBGImg = ($dom, position, iconName) ->
 #
 # selectedDate: yyyy-mm-dd
 kufu.cal.drawCalList = (selectedDate) ->
-  console.log "drawCalList=#{selectedDate}"
   $("#eventList ul li").addClass("hidden")
-  $("#eventList ul li[data-date=" + selectedDate + "]").removeClass("hidden")
+  $("#eventList ul li.ed-" + selectedDate).removeClass("hidden")
 
-  
 
 
 
@@ -128,9 +129,9 @@ $(document).on("ready pjax:success", () ->
           classNames.push("ui-datepicker-saturday")
 
         fmtDate = $.format.date(date, 'yyyy-MM-dd')
-        $dayData = $("#cal").find(".event-data[data-date=#{fmtDate}]")
+        $eventDOMs = $("#eventList li.ed-#{fmtDate}")
 
-        classNames = classNames.concat(kufu.cal.createIconClasses($dayData))
+        classNames = classNames.concat(kufu.cal.createIconClasses($eventDOMs))
 
         return [true, classNames.join(" ")];
       ,
