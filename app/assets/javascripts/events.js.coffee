@@ -9,7 +9,7 @@ kufu.IMG_BASE_URL = "assets"
 
 
 # カレンダーアイコンの設定
-# $dayDate: jQuery Objects on a day
+# $dayData: jQuery Objects on a day
 kufu.cal.createIconClasses = ($dayData) ->
   classNames = []
 
@@ -38,6 +38,21 @@ kufu.cal.setIcons = () ->
 kufu.cal.replaceBGImg = ($dom, position, iconName) ->
   bg = $dom.find("a").attr("data-css-background-image")
   $dom.find("a").attr("data-css-background-image", bg.replace("dummy-#{position}", iconName))
+
+
+# イベント一覧エリアの描画
+# 一度初期化し、指定の日付の情報を取得、設定する
+#
+# selectedDate: yyyy-mm-dd
+kufu.cal.drawCalList = (selectedDate) ->
+  console.log "drawCalList=#{selectedDate}"
+  $("#eventList ul li").addClass("hidden")
+  $("#eventList ul li[data-date=" + selectedDate + "]").removeClass("hidden")
+
+  
+
+
+
 
 
 $(document).on("ready pjax:success", () ->
@@ -97,9 +112,11 @@ $(document).on("ready pjax:success", () ->
           $(this).find(".ui-datepicker-next").click()
         else if ui.currentMonth < ui.drawMonth
           $(this).find(".ui-datepicker-prev").click()
+
+        fmtDate = selectedDate.replace(/\//g, "-")
+        kufu.cal.drawCalList(fmtDate)
       ,
       beforeShowDay: (date) ->
-        console.log "beforeShowDay"
         classNames = []
         if date.getDay() == 0
           # 日曜日
@@ -112,6 +129,7 @@ $(document).on("ready pjax:success", () ->
 
         fmtDate = $.format.date(date, 'yyyy-MM-dd')
         $dayData = $("#cal").find(".event-data[data-date=#{fmtDate}]")
+
         classNames = classNames.concat(kufu.cal.createIconClasses($dayData))
 
         return [true, classNames.join(" ")];

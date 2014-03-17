@@ -17,7 +17,7 @@
         全国/~1000円/初心者OK/土日・祝日開催
       %ul
         - @events.each do |event|
-          %li
+          %li.hidden{:"data-date" => event.start_at.strftime("%Y-%m-%d")}
             %a.eventDetail{:href => "#event-#{event.id}", :"data-id" => event.id}
               %img{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
               =event.title
