@@ -87,7 +87,6 @@ kufu.cal.initDatepicker = () ->
       kufu.cal.drawCalList(fmtDate)
     ,
     beforeShowDay: (date) ->
-      console.log "beforeShowDay"
       classNames = []
       if date.getDay() == 0
         # 日曜日
@@ -107,7 +106,6 @@ kufu.cal.initDatepicker = () ->
       return [true, classNames.join(" ")];
     ,
     afterShow: () ->
-      console.log "afterShow"
       # Android OS 2.3.X 対応
       #   $(...).css("background-image") で複数指定した値を取得した際に、
       #   最初の値のみしか取得できない問題への対応
@@ -162,7 +160,7 @@ $(document).on("ready pjax:success", () ->
   # イベントが指定されている場合は開く
   do () ->
     eid = $.url().param('eid')
-    $(".eventDetail[data-id=#{eid}]").click()
+    $(".eventDetail[href=#event-#{eid}]").click()
 
   # 新規作成の場合はフォームを開く
   do () ->

@@ -50,14 +50,9 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        # format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        flash.now[:notice] = "イベントが更新されました"
-        format.html { render action: 'edit', layout: false}
-        format.json { head :no_content }
+        format.html { redirect_to root_path(eid: @event.id), notice: 'Event was successfully updated.' }
       else
-        # format.html { render action: 'edit' }
-        format.html { render action: 'edit', layout: false}
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.html { render action: 'edit' }
       end
     end
   end
