@@ -17,11 +17,21 @@ kufu.cal.getSelectedDate = () ->
 kufu.cal.createIconClasses = ($eventDOMs) ->
   classNames = []
 
-  for iconName in ["facebook", "mixi", "twipla", "tweetvite", "dummy"]
-    if 0 < $eventDOMs.filter("[data-icon-type=" + iconName + "]").size()
-      classNames.push("js-datepicker-icon-" + iconName)
+  # left
+  if 1 <= $eventDOMs.size()
+    iconName = $eventDOMs.eq(0).attr("data-icon-type")
+    classNames.push("js-datepicker-left-icon-" + iconName)
+  # center
+  if 2 <= $eventDOMs.size()
+    iconName = $eventDOMs.eq(1).attr("data-icon-type")
+    classNames.push("js-datepicker-center-icon-" + iconName)
+  # right
+  if 3 == $eventDOMs.size()
+    iconName = $eventDOMs.eq(2).attr("data-icon-type")
+    classNames.push("js-datepicker-right-icon-" + iconName)
+
   if 3 < $eventDOMs.size()
-    classNames.push("js-datepicker-icon-plus")
+    classNames.push("js-datepicker-right-icon-plus")
 
   return classNames
 
@@ -30,21 +40,11 @@ kufu.cal.createIconClasses = ($eventDOMs) ->
 # アイコンを data-css-background-image に設定する
 kufu.cal.setIcons = () ->
   # アイコンの設定
-  $(".js-datepicker-icon-facebook").each(()->
-    kufu.cal.replaceBGImg($(this), "left", "icon-facebook")
-  )
-  $(".js-datepicker-icon-mixi").each(()->
-    kufu.cal.replaceBGImg($(this), "left", "icon-mixi")
-  )
-  $(".js-datepicker-icon-tweetvite").each(()->
-    kufu.cal.replaceBGImg($(this), "left", "icon-tweetvite")
-  )
-  $(".js-datepicker-icon-dummy").each(()->
-    kufu.cal.replaceBGImg($(this), "center", "icon-dummy")
-  )
-  $(".js-datepicker-icon-plus").each(()->
-    kufu.cal.replaceBGImg($(this), "right", "icon-plus")
-  )
+  for pos in ["left", "center", "right"]
+    for iconName in ["facebook", "mixi", "twipla", "tweetvite", "dummy", "plus"]
+      $(".js-datepicker-#{pos}-icon-#{iconName}").each(()->
+        kufu.cal.replaceBGImg($(this), pos, "icon-#{iconName}")
+      )
 
 # Android OS 2.3.X 対応
 #   $(...).css("background-image") で複数指定した値を取得した際に、
