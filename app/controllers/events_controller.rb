@@ -17,7 +17,8 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+    @events = Event.all
+    @new_event = Event.new
   end
 
   # GET /events/1/edit
@@ -27,17 +28,19 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-    @event.session_id = request.session_options[:id]
+    @events = Event.all
+    @new_event = Event.new(event_params)
+    @new_event.session_id = request.session_options[:id]
 
     respond_to do |format|
-      if @event.save
+      if @new_event.save
         # format.html { render action: 'index' }
-        format.html { redirect_to root_path, notice: 'Event was successfully created.' }
+        format.html { redirect_to root_path(eid: @new_event.id), notice: 'Event was successfully created.' }
         # format.json { render action: 'show', status: :created, location: @event }
       else
         format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        # format.json { render json: @event.errors, status: :unprocessable_entity }
+        # format.html { redirect_to root_path, eror: 'failed to create an event.', params: {eid: @event.id} }
       end
     end
   end

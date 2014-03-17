@@ -2,7 +2,7 @@
   .notice= notice
   - t_ar = I18n.t("activerecord.attributes.event")
   - t_sf = I18n.t("simple_form.labels.event")
-  = simple_form_for event, :remote => true, :'data-type' => :html do |f|
+  = simple_form_for event do |f|
     = f.input :url, label: fa_tag("fa-link") + t_ar[:url]
     = f.input :title, label: fa_tag("fa-bell") + t_ar[:title]
     = f.input :start_at, label: fa_tag("fa-clock-o") + t_ar[:start_at], as: :datetime_local

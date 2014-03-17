@@ -17,6 +17,7 @@
 //= require jquery.colorbox-min
 //= require json2
 //= require moment-2.5.1
+//= require purl
 //= require site
 //= require style
 //= require_tree .

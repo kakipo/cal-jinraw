@@ -4,6 +4,8 @@
 
 $(document).on("ready pjax:success", () ->
 
+    
+
   do () ->
     $(".aboutBtn").colorbox({
       returnFocus:false,
@@ -26,8 +28,21 @@ $(document).on("ready pjax:success", () ->
     $(".eventDetail").colorbox({
       returnFocus:false,
       inline:true,
-      width:"98%"
+      width:"100%"
     })
+
+
+
+  # イベントが指定されている場合は開く
+  do () ->
+    eid = $.url().param('eid')
+    $(".eventDetail[data-id=#{eid}]").click()
+
+  # 新規作成の場合はフォームを開く
+  do () ->
+    return unless $("body.events.new, body.events.create").size() == 1
+    $(".addEventBtn").click()
+
 
   do () ->
     $("#cal").datepicker({

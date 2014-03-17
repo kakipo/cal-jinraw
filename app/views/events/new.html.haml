@@ -1,4 +1,1 @@
-%h2 
-  %i.fa.fa-arrow-circle-o-up
-  イベントを投稿
-= render :partial => "events/form", :locals => {:event => @event}
+=render :partial => "events/cal", :locals => {:events => @events, :new_event => @new_event}
