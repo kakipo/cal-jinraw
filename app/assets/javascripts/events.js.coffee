@@ -81,9 +81,29 @@ $(document).on("ready pjax:success", () ->
 
   # 絞り込み条件を表示する
   refreshFilterConditonLabel = () ->
-    prefTxt = $("#js-filter-pref-id option:selected").text()
-    priceRangeTxt = $("#js-filter-price-range-id option:selected").text()
-    $("#search-cond-container span.content").text("#{prefTxt}/#{priceRangeTxt}")
+    txtArr = []
+
+    txtArr.push $("#js-filter-pref-id option:selected").text()
+    txtArr.push $("#js-filter-price-range-id option:selected").text()
+
+    beginnerFlg = $("#js-filter-beginner-flg").prop("checked")
+    proFlg = $("#js-filter-pro-flg").prop("checked")
+    weekdayFlg = $("#js-filter-weekday-flg").prop("checked")
+    holidayFlg = $("#js-filter-holiday-flg").prop("checked")
+    allnightFlg = $("#js-filter-allnight-flg").prop("checked")
+
+    if beginnerFlg
+      txtArr.push "初心者OK"
+    if proFlg
+      txtArr.push "玄人向け"
+    if weekdayFlg
+      txtArr.push "平日開催"
+    if holidayFlg
+      txtArr.push "土日・祝日開催"
+    if allnightFlg
+      txtArr.push "オールナイト"
+
+    $("#search-cond-container span.content").text(txtArr.join("/"))
 
   # 絞込処理の実施
   doFilterEvents = (prefId, priceRangeId, beginnerFlg, proFlg, weekdayFlg, holidayFlg, allnightFlg) ->
