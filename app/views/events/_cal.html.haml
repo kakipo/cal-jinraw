@@ -35,6 +35,7 @@
           %i.fa.fa-question>
           \人狼イベントカレンダーとは？
     %div
+    - # イベント詳細部
     %div.displayNone
       - @events.each do |event|
         %div.eventDetailBox{id: "event-#{event.id}"}
@@ -42,7 +43,7 @@
             %span.muted="[ID: #{event.id}]"
             %span イベント詳細
           %p.eventTitle
-            %img.favicon{src: "http://getsocialostrich.com/img/facebook_favicon.png"}>/
+            %img{src: asset_path("icon-#{icon_type(event.url)}.png")}>/
             =event.title
           %div.date=event.start_at
           %h3
