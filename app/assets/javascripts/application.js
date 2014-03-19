@@ -18,6 +18,7 @@
 //= require moment-2.5.1
 //= require purl
 //= require jquery-dateFormat
+//= require jquery.cookie
 //= require site
 //= require style
 //= require_tree .
