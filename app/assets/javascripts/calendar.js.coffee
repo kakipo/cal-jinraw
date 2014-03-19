@@ -64,8 +64,16 @@ kufu.cal.replaceBGImg = ($dom, position, iconName) ->
 # selectedDate: yyyy-mm-dd
 kufu.cal.drawCalList = (selectedDate) ->
   $("#date_val").html(selectedDate + "のイベント")
-  $("#eventList ul li").addClass("hidden")
-  $("#eventList ul li.ed-" + selectedDate + "[data-filtered=false]").removeClass("hidden")
+  $events = $("#eventList ul li")
+  $events.addClass("hidden")
+  $eventAtDay = $events.filter(".ed-" + selectedDate + "[data-filtered=false]")
+  $eventAtDay.removeClass("hidden")
+
+  # 結果存在有無メッセージの表示、非表示
+  if 0 < $eventAtDay.size()
+    $("#no-event-message-container").addClass("hidden")
+  else
+    $("#no-event-message-container").removeClass("hidden")
 
 
 # カレンダーの初期化
