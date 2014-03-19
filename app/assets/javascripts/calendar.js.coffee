@@ -14,7 +14,8 @@ kufu.cal.FILTER_KEY_ALLNIGHT_FLG = "filter_key_allnight_flg"
 
 # date 取得用関数
 kufu.cal.getSelectedDate = () ->
-  $.format.date($('#cal').datepicker('getDate'), 'yyyy-MM-dd')
+  # $.format.date($('#cal').datepicker('getDate'), 'yyyy-MM-dd')
+  moment($('#cal').datepicker('getDate')).format('YYYY-MM-DD')
 
 # カレンダーアイコンの設定
 # $eventDOMs: jQuery Objects on a day
@@ -96,6 +97,25 @@ kufu.cal.initDatepicker = () ->
 
       fmtDate = selectedDate.replace(/\//g, "-")
       kufu.cal.drawCalList(fmtDate)
+
+      # 入力フォームの開始日時に選択日付を設定する
+      # 開始日時: 選択日 + 現在時刻 (10分単位で切り上げ)
+      # 終了日時: 開始日時 + 3時間
+      tmpMoment = moment().add('minutes', 10)
+      tmpDate = new Date(tmpMoment.format())
+      h = tmpDate.getHours()
+      m = Math.floor(tmpDate.getMinutes() / 10) * 10
+      if m < 10
+        m = "0#{m}"
+
+      strStartAt = "#{moment(selectedDate).format('YYYY-MM-DD')}T#{h}:#{m}"
+      # console.log strStartAt
+      $("#event_start_at").val(strStartAt)
+
+      strEndAt = moment(strStartAt).add('hours', 2).format("YYYY-MM-DDTHH:mm")
+      $("#event_end_at").val(strEndAt)
+      # console.log strEndAt
+
     ,
     beforeShowDay: (date) ->
       classNames = []
@@ -108,7 +128,8 @@ kufu.cal.initDatepicker = () ->
           # 土曜日
         classNames.push("ui-datepicker-saturday")
 
-      fmtDate = $.format.date(date, 'yyyy-MM-dd')
+      # fmtDate = $.format.date(date, 'yyyy-MM-dd')
+      fmtDate = moment(date).format('YYYY-MM-DD')
 
       $eventDOMs = $("#eventList li.ed-#{fmtDate}[data-filtered=false]")
 
