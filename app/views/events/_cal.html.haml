@@ -47,7 +47,7 @@
           %p.eventTitle
             %img{src: asset_path("icon-#{icon_type(event.url)}.png")}>/
             =event.title
-          %div.date=event.start_at
+          %div.date=simple_date(event.start_at)
           %h3
             %i.fa.fa-building-o
             会場
@@ -65,7 +65,10 @@
             %i.fa.fa-users
             定員
           =event.capacity
-          人
+          %h3
+            %i.fa.fa-star
+            カテゴリ
+          =str_categories(event)
           %p
             - if my_event?(event)
               %a.editBtn{href: edit_event_path(event)}
@@ -104,25 +107,26 @@
         %h3
           %i.fa.fa-search-plus>
           \その他の条件でしぼりこみ
+        - t_event = I18n.t("activerecord.attributes.event")
         %label
           %input#js-filter-beginner-flg{type: "checkbox", value: "1"}/
-          \初心者OK
+          =t_event[:cat_beginner_flg]
         \
         %label
           %input#js-filter-pro-flg{type: "checkbox", value: "1"}/
-          \玄人向け
+          =t_event[:cat_pro_flg]
         \
         %label
           %input#js-filter-weekday-flg{type: "checkbox", value: "1"}/
-          \平日開催
+          =t_event[:cat_weekday_flg]
         \
         %label
           %input#js-filter-holiday-flg{type: "checkbox", value: "1"}/
-          \土日・祝日開催
+          =t_event[:cat_holyday_flg]
         \
         %label
           %input#js-filter-allnight-flg{type: "checkbox", value: "1"}/
-          \オールナイト
+          =t_event[:cat_allnight_flg] 
         .clear
         %button#js-do-filter{type: "submit"} この条件で絞り込む
 
