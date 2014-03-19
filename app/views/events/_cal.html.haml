@@ -48,27 +48,32 @@
             %img{src: asset_path("icon-#{icon_type(event.url)}.png")}>/
             =event.title
           %div.date=simple_date(event.start_at)
-          %h3
-            %i.fa.fa-building-o
-            会場
-          =event.place
-          %h3
-            %i.fa.fa-map-marker
-            住所
-          =event.address
-          %h3
-            %i.fa.fa-jpy
-            料金
-          =event.price
-          円
-          %h3
-            %i.fa.fa-users
-            定員
-          =event.capacity
-          %h3
-            %i.fa.fa-star
-            カテゴリ
-          =str_categories(event)
+          %div
+            %h3
+              %i.fa.fa-building-o
+              会場
+            =event.place
+          %div
+            %h3
+              %i.fa.fa-map-marker
+              住所
+            =event.address
+          %div
+            %h3
+              %i.fa.fa-jpy
+              料金
+            =event.price
+            円
+          %div
+            %h3
+              %i.fa.fa-users
+              定員
+            =event.capacity
+          %div
+            %h3
+              %i.fa.fa-star
+              カテゴリ
+            =str_categories(event)
           %p
             - if my_event?(event)
               %a.editBtn{href: edit_event_path(event)}
@@ -126,7 +131,7 @@
         \
         %label
           %input#js-filter-allnight-flg{type: "checkbox", value: "1"}/
-          =t_event[:cat_allnight_flg] 
+          =t_event[:cat_allnight_flg]
         .clear
         %button#js-do-filter{type: "submit"} この条件で絞り込む
 
