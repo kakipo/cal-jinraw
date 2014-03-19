@@ -15,11 +15,12 @@
       %h2
         %i.fa.fa-calendar
           %span#date_val 今月のイベント
-      %div#search-cond-container
-        %span.title 現在の絞込条件（and検索）:
+      %div#search-cond-container{style: "text-align: center;"}
+        %span.title 現在の絞込条件（and検索）
+        %br
         %span.content なし
       %div#no-event-message-container.hidden
-        %h2.muted この日は条件に合致するイベントがないです
+        %h2.muted この日は条件に合致するイベントがありません
       %ul
         - @events.each do |event|
           %li.hidden{:"class" => "ed-#{event.start_at.strftime('%Y-%m-%d')}", :"data-id" => event.id, :"data-icon-type" => icon_type(event.url), :"data-filtered" => "false", :"data-price-range-ids" => price_range_ids(event.price), :"data-pref-id" => event.prefecture.id, :"data-weekday-flg" => event.cat_weekday_flg.to_s, :"data-holiday-flg" => event.cat_holiday_flg.to_s, :"data-allnight-flg" => event.cat_allnight_flg.to_s, :"data-beginner-flg" => event.cat_beginner_flg.to_s, :"data-pro-flg" => event.cat_pro_flg.to_s }
@@ -120,14 +121,6 @@
         %label
           %input#js-filter-pro-flg{type: "checkbox", value: "1"}/
           =t_event[:cat_pro_flg]
-        \
-        %label
-          %input#js-filter-weekday-flg{type: "checkbox", value: "1"}/
-          =t_event[:cat_weekday_flg]
-        \
-        %label
-          %input#js-filter-holiday-flg{type: "checkbox", value: "1"}/
-          =t_event[:cat_holiday_flg]
         \
         %label
           %input#js-filter-allnight-flg{type: "checkbox", value: "1"}/

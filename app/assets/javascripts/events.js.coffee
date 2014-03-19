@@ -92,7 +92,7 @@ $(document).on("ready pjax:success", () ->
     if allnightFlg
       txtArr.push "オールナイト"
 
-    $("#search-cond-container span.content").text(txtArr.join("/"))
+    $("#search-cond-container span.content").text(txtArr.join(" / "))
 
   # 絞込処理の実施
   doFilterEvents = (prefId, priceRangeId, beginnerFlg, proFlg, weekdayFlg, holidayFlg, allnightFlg) ->
