@@ -13,9 +13,9 @@ kufu.cal.FILTER_KEY_HOLIDAY_FLG = "filter_key_holiday_flg"
 kufu.cal.FILTER_KEY_ALLNIGHT_FLG = "filter_key_allnight_flg"
 
 # date 取得用関数
-kufu.cal.getSelectedDate = () ->
+# kufu.cal.getSelectedDate = () ->
   # $.format.date($('#cal').datepicker('getDate'), 'yyyy-MM-dd')
-  moment($('#cal').datepicker('getDate')).format('YYYY-MM-DD')
+  # moment($('#cal').datepicker('getDate')).format('YYYY-MM-DD')
 
 # カレンダーアイコンの設定
 # $eventDOMs: jQuery Objects on a day
@@ -76,6 +76,26 @@ kufu.cal.drawCalList = (selectedDate) ->
   else
     $("#no-event-message-container").removeClass("hidden")
 
+# 入力フォームの開始日時に選択日付を設定する
+# 開始日時: 選択日 + 現在時刻 (10分単位で切り上げ)
+# 終了日時: 開始日時 + 3時間
+#
+# selectedDate: yyyy-mm-dd
+kufu.cal.setDate = (selectedDate) ->
+  tmpMoment = moment().add('minutes', 10)
+  tmpDate = new Date(tmpMoment.format())
+  h = tmpDate.getHours()
+  m = Math.floor(tmpDate.getMinutes() / 10) * 10
+  if m < 10
+    m = "0#{m}"
+
+  strStartAt = "#{moment(selectedDate).format('YYYY-MM-DD')}T#{h}:#{m}"
+  # console.log strStartAt
+  $("#event_start_at").val(strStartAt)
+
+  strEndAt = moment(strStartAt).add('hours', 2).format("YYYY-MM-DDTHH:mm")
+  $("#event_end_at").val(strEndAt)
+  # console.log strEndAt  
 
 # カレンダーの初期化
 kufu.cal.initDatepicker = () ->
@@ -97,25 +117,6 @@ kufu.cal.initDatepicker = () ->
 
       fmtDate = selectedDate.replace(/\//g, "-")
       kufu.cal.drawCalList(fmtDate)
-
-      # 入力フォームの開始日時に選択日付を設定する
-      # 開始日時: 選択日 + 現在時刻 (10分単位で切り上げ)
-      # 終了日時: 開始日時 + 3時間
-      tmpMoment = moment().add('minutes', 10)
-      tmpDate = new Date(tmpMoment.format())
-      h = tmpDate.getHours()
-      m = Math.floor(tmpDate.getMinutes() / 10) * 10
-      if m < 10
-        m = "0#{m}"
-
-      strStartAt = "#{moment(selectedDate).format('YYYY-MM-DD')}T#{h}:#{m}"
-      # console.log strStartAt
-      $("#event_start_at").val(strStartAt)
-
-      strEndAt = moment(strStartAt).add('hours', 2).format("YYYY-MM-DDTHH:mm")
-      $("#event_end_at").val(strEndAt)
-      # console.log strEndAt
-
     ,
     beforeShowDay: (date) ->
       classNames = []
@@ -152,6 +153,8 @@ kufu.cal.initDatepicker = () ->
       )
 
       # 描画
-      d = kufu.cal.getSelectedDate()
+      d = moment($('#cal').datepicker('getDate')).format('YYYY-MM-DD')
+      # d = kufu.cal.getSelectedDate()
       kufu.cal.drawCalList(d)
+      kufu.cal.setDate(d)
   })
