@@ -37,13 +37,12 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @new_event.save
-        # format.html { render action: 'index' }
-        format.html { redirect_to root_path(eid: @new_event.id), notice: 'Event was successfully created.' }
-        # format.json { render action: 'show', status: :created, location: @event }
+        format.html { redirect_to root_path(eid: @new_event.id), notice: 'イベントを作成しました' }
       else
-        format.html { render action: 'new' }
-        # format.json { render json: @event.errors, status: :unprocessable_entity }
-        # format.html { redirect_to root_path, eror: 'failed to create an event.', params: {eid: @event.id} }
+        format.html { 
+          flash.now[:alert] = "イベントの作成に失敗しました"
+          render action: 'new' 
+        }
       end
     end
   end
@@ -53,9 +52,12 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to root_path(eid: @event.id), notice: 'Event was successfully updated.' }
+        format.html { redirect_to root_path(eid: @event.id), notice: 'イベントを更新しました' }
       else
-        format.html { render action: 'edit' }
+        format.html { 
+          flash.now[:alert] = "イベントの編集に失敗しました"
+          render action: 'edit' 
+        }
       end
     end
   end
