@@ -33,17 +33,6 @@ $(document).on("ready pjax:success", () ->
 
 
 
-  # イベントが指定されている場合は開く
-  do () ->
-    eid = $.url().param('eid')
-    $(".eventDetail[href=#event-#{eid}]").click()
-
-  # 新規作成の場合はフォームを開く
-  do () ->
-    return unless $("body.events.new, body.events.create").size() == 1
-    $(".addEventBtn").click()
-
-
   # 絞込条件を cookie に保存する
   saveFilterConditions = (prefId, priceRangeId, beginnerFlg, proFlg, weekdayFlg, holidayFlg, allnightFlg) ->
 
@@ -165,5 +154,16 @@ $(document).on("ready pjax:success", () ->
 
     # 絞込の実施
     $("#js-do-filter").click()
+
+
+  # イベントが指定されている場合は開く
+  do () ->
+    eid = $.url().param('eid')
+    $(".eventDetail[href=#event-#{eid}]").click()
+
+  # 新規作成の場合はフォームを開く
+  do () ->
+    return unless $("body.events.new, body.events.create").size() == 1
+    $(".addEventBtn").click()
 
 ) # end of onready function

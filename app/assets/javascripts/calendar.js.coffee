@@ -113,7 +113,7 @@ kufu.cal.initDatepicker = () ->
       #   $(...).css("background-image") で複数指定した値を取得した際に、
       #   最初の値のみしか取得できない問題への対応
       $dates = $(".ui-datepicker-calendar td a.ui-state-default")
-      $dates.attr("data-css-background-image", "url(\"#{kufu.IMG_BASE_URL}/dummy-left.png\"), url(\"#{kufu.IMG_BASE_URL}/dummy-center.png\"), url(\"#{kufu.IMG_BASE_URL}/dummy-right.png\")")
+      $dates.attr("data-css-background-image", "url(\"/#{kufu.IMG_BASE_URL}/dummy-left.png\"), url(\"/#{kufu.IMG_BASE_URL}/dummy-center.png\"), url(\"/#{kufu.IMG_BASE_URL}/dummy-right.png\")")
 
       kufu.cal.setIcons()
 

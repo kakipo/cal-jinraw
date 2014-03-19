@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.all.order(:start_at)
     p "**** request.session_options[:id] = #{request.session_options[:id]}"
   end
 
@@ -20,7 +20,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @events = Event.all.order_by(start_at: 1)
+    @events = Event.all.order(:start_at)
     @new_event = Event.new
   end
 
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_path, notice: 'イベントを削除しました'  }
       format.json { head :no_content }
     end
   end
