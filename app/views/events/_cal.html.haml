@@ -15,7 +15,7 @@
         %span.content なし
       %ul
         - @events.each do |event|
-          %li.hidden{:"class" => "ed-#{event.start_at.strftime('%Y-%m-%d')}", :"data-id" => event.id, :"data-icon-type" => icon_type(event.url), :"data-filtered" => "false", :"data-price-range-id" => price_range_id(event.price), :"data-pref-id" => event.prefecture.id, :"data-weekday-flg" => event.cat_weekday_flg.to_s, :"data-holiday-flg" => event.cat_holiday_flg.to_s, :"data-allnight-flg" => event.cat_allnight_flg.to_s, :"data-beginner-flg" => event.cat_beginner_flg.to_s, :"data-pro-flg" => event.cat_pro_flg.to_s }
+          %li.hidden{:"class" => "ed-#{event.start_at.strftime('%Y-%m-%d')}", :"data-id" => event.id, :"data-icon-type" => icon_type(event.url), :"data-filtered" => "false", :"data-price-range-ids" => price_range_ids(event.price), :"data-pref-id" => event.prefecture.id, :"data-weekday-flg" => event.cat_weekday_flg.to_s, :"data-holiday-flg" => event.cat_holiday_flg.to_s, :"data-allnight-flg" => event.cat_allnight_flg.to_s, :"data-beginner-flg" => event.cat_beginner_flg.to_s, :"data-pro-flg" => event.cat_pro_flg.to_s }
             %a.eventDetail{:href => "#event-#{event.id}"}
               %img{src: asset_path("icon-#{icon_type(event.url)}.png")}>/
               =event.title

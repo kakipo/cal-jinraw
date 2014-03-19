@@ -113,7 +113,8 @@ $(document).on("ready pjax:success", () ->
     unless prefId == "na"
       $available = $available.filter("[data-pref-id=" + prefId + "]")
     unless priceRangeId == "na"
-      $available = $available.filter("[data-price-range-id=" + priceRangeId + "]")
+      console.log "priceRangeId=#{priceRangeId}"
+      $available = $available.filter("[data-price-range-ids~='" + priceRangeId + "']")
     if beginnerFlg
       $available = $available.filter("[data-beginner-flg=" + beginnerFlg + "]")
     if proFlg

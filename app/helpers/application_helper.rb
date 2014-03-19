@@ -22,19 +22,17 @@ module ApplicationHelper
     ret
   end
 
-  def price_range_id(price)
-    ret = 0
+  def price_range_ids(price)
+    ret = "0"
     case price
-    when 0
-      ret = 1
-    when 1..1000
-      ret = 2
-    when 1001..2000
-      ret = 3
-    when 2001..3000
-      ret = 4
+    when 0..1000
+      ret = "3 2 1"
+    when 0..2000
+      ret = "3 2"
+    when 0..3000
+      ret = "3"
     else
-      ret = 5
+      ret = "N/A"
     end
     ret
   end
