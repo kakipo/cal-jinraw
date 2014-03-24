@@ -299,6 +299,7 @@ p.text_right i {
   clear: both;
   font-weight: bold;
   border-bottom: 1px solid #ccc;
+  line-height: 1.4;
 }
 
 #eventList li img {
@@ -316,10 +317,15 @@ p.text_right i {
   background: #fff;
 }
 
+#eventList li a img{
+  float: left;
+}
+
 #eventList span {
-  margin-left: 10px;
+  margin-right: 5px;
   color: #666;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: normal;
 }
 
 #footer {
