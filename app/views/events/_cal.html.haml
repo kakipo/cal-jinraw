@@ -27,8 +27,9 @@
             %a.eventDetail{:href => "#event-#{event.id}"}
               %img{src: asset_path("icon-#{icon_type(event.url)}.png")}>/
               =event.title
+              %br
+              %span=event.prefecture.name
               %span
-                =event.prefecture.name
                 =simple_datetime(event.start_at)
                 -if event.end_at.present?
                   ="~"
