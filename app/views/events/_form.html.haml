@@ -13,6 +13,7 @@
     = f.input :price, label: fa_tag("fa-jpy") + t_ar[:price], input_html: {step: 100}
     = f.input :capacity, label: fa_tag("fa-users") + t_ar[:capacity]
     = f.input :categories, label: fa_tag("fa-star") + t_sf[:categories] do
+      %br
       = f.input :cat_beginner_flg, wrapper_html: { class: 'inline right-margin' }
       = f.input :cat_pro_flg, wrapper_html: { class: 'inline right-margin' }
     = f.button :submit
