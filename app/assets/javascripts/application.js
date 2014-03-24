@@ -18,6 +18,8 @@
 //= require moment-2.5.1
 //= require purl
 //= require jquery.cookie
+//= require jquery.event.move
+//= require jquery.event.swipe
 //= require site
 //= require style
 //= require_tree .

@@ -158,3 +158,6 @@ kufu.cal.initDatepicker = () ->
       kufu.cal.drawCalList(d)
       kufu.cal.setDate(d)
   })
+
+
+

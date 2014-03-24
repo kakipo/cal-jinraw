@@ -166,4 +166,18 @@ $(document).on("ready pjax:success", () ->
     return unless $("body.events.new, body.events.create").size() == 1
     $(".addEventBtn").click()
 
+
+  do () ->
+    # スワイプの設定
+    $("#cal").on('swipeleft', (e) ->
+      $(this).find(".ui-datepicker-next").click()
+    ).on('swiperight', (e) ->
+      $(this).find(".ui-datepicker-prev").click()
+    ).on('movestart', (e) ->
+      if ((e.distX > e.distY && e.distX < -e.distY) or
+          (e.distX < e.distY && e.distX > -e.distY))
+        e.preventDefault();
+    )
+
+
 ) # end of onready function
