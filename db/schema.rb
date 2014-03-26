@@ -15,13 +15,11 @@ ActiveRecord::Schema.define(version: 20140312100338) do
 
   create_table "events", force: true do |t|
     t.string   "url"
-    t.date     "event_date"
     t.string   "title"
     t.string   "place"
     t.string   "address"
     t.integer  "price"
     t.integer  "capacity"
-    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "session_id"

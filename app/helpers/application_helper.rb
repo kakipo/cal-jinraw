@@ -1,5 +1,5 @@
+# coding: utf-8
 module ApplicationHelper
-
 
   def simple_date(dt)
     return if dt.blank?

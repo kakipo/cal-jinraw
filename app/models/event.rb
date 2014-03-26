@@ -71,7 +71,7 @@ class Event < ActiveRecord::Base
   def is_allnight?
     return false if self.end_at.blank?
 
-    is_over_day = (self.end_at - self.start_at) > 0
+    is_over_day = ((self.end_at.midnight - self.start_at.midnight).to_i / 1.day) > 0
     start_at_midnight = self.start_at < self.start_at.midnight + 4.hour
 
     return (is_over_day or start_at_midnight)
