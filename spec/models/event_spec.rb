@@ -48,32 +48,32 @@ describe Event do
       end
 
       context "when end_at is blank" do
-        let(:mod_start_at) { DateTime.new(2014,3,10,15,30,50) }
+        let(:mod_start_at) { Time.zone.parse("2014-03-10 15:30:50") }
         let(:mod_end_at) { nil }
         it { should be_false }
       end
 
       context "when it starts at afternoon and ends at night" do
-        let(:mod_start_at) { DateTime.new(2014,3,10,13,30,50) }
-        let(:mod_end_at) { DateTime.new(2014,3,10,19,30,50) }
+        let(:mod_start_at) { Time.zone.parse("2014-03-10 13:30:50") }
+        let(:mod_end_at) { Time.zone.parse("2014-03-10 19:30:50") }
+        it { should be_false }
+      end
+
+      context "when over a day(1)" do
+        let(:mod_start_at) { Time.zone.parse("2014-03-10 15:30:50") }
+        let(:mod_end_at) { Time.zone.parse("2014-3-11 00:00:00") }
         it { should be_true }
       end
 
-      context "when over a day" do
-        let(:mod_start_at) { DateTime.new(2014,3,10,15,30,50) }
-        let(:mod_end_at) { DateTime.new(2014,3,11,0,0,0) }
-        it { should be_true }
-      end
-
-      context "when over a day" do
-        let(:mod_start_at) { DateTime.new(2014,3,10,15,30,50) }
-        let(:mod_end_at) { DateTime.new(2014,3,11,0,0,0) }
+      context "when over a day(2)" do
+        let(:mod_start_at) { Time.zone.parse("2014-03-10 15:30:50") }
+        let(:mod_end_at) { Time.zone.parse("2014-3-11 01:30:00") }
         it { should be_true }
       end
 
       context "when it starts at midninght" do
-        let(:mod_start_at) { DateTime.new(2014,3,10,2,30,50) }
-        let(:mod_end_at) { DateTime.new(2014,3,10,7,30,0) }
+        let(:mod_start_at) { Time.zone.parse("2014-03-10 02:00:00") }
+        let(:mod_end_at) { Time.zone.parse("2014-03-10 07:0:00") }
         it { should be_true }
       end
 
