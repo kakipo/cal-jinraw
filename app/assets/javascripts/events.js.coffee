@@ -10,19 +10,19 @@ $(document).on("ready pjax:success", () ->
     $(".aboutBtn").colorbox({
       returnFocus:false,
       inline:true,
-      width:"98%"
+      width:"100%"
     })
 
     $(".searchBtn").colorbox({
       returnFocus:false,
       inline:true,
-      width:"98%"
+      width:"100%"
     })
 
     $(".addEventBtn").colorbox({
       returnFocus:false,
       inline:true,
-      width:"98%"
+      width:"100%"
     })
 
     $(".eventDetail").colorbox({
