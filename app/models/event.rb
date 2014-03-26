@@ -61,6 +61,8 @@ class Event < ActiveRecord::Base
     self.cat_weekday_flg = !self.is_holiday?
     self.cat_holiday_flg = self.is_holiday?
     self.cat_allnight_flg = self.is_allnight?
+
+    return true
   end
 
   def is_holiday?
