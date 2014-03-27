@@ -26,7 +26,7 @@
             %a.eventDetail{:href => "#event-#{event.id}"}
               %img{src: asset_path("icon-#{icon_type(event.url)}.png")}>/
               %p
-                event.title
+                =event.title
                 %br
                 %span=event.prefecture.name
                 %span
