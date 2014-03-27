@@ -53,7 +53,7 @@ a.ui-corner-all:hover {
 
 .ui-datepicker-header {
   color: #333;
-  padding: 15px;
+  padding: 8px 15px;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
@@ -87,8 +87,15 @@ td.ui-datepicker-other-month {
 .ui-datepicker-calendar td a {
   color: #333;
   display: block;
+  padding:18px 0px 18px;
+}
+
+@media screen and (max-width: 641px),(device-height: 558px) and (-webkit-min-device-pixel-ratio: 2) {
+.ui-datepicker-calendar td a {
   padding:2px 0px 10px;
 }
+}
+
 
 td.ui-datepicker-today .ui-state-active,td.ui-datepicker-current-day a.ui-state-active {
   background-color: #FF9900;
