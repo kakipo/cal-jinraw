@@ -95,7 +95,7 @@ kufu.cal.setDate = (selectedDate) ->
 
   strEndAt = moment(strStartAt).add('hours', 2).format("YYYY-MM-DDTHH:mm")
   $("#event_end_at").val(strEndAt)
-  # console.log strEndAt  
+  # console.log strEndAt
 
 # カレンダーの初期化
 kufu.cal.initDatepicker = () ->
@@ -109,7 +109,7 @@ kufu.cal.initDatepicker = () ->
         $(this).datepicker('setDate', "#{year}/#{fmtMonth}/01")
     ,
     onSelect: (selectedDate, ui) ->
-     
+
       if ui.drawMonth < ui.currentMonth
         $(this).find(".ui-datepicker-next").click()
       else if ui.currentMonth < ui.drawMonth
