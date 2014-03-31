@@ -46,7 +46,7 @@ kufu.cal.createIconClasses = ($eventDOMs) ->
 kufu.cal.setIcons = () ->
   # アイコンの設定
   for pos in ["left", "center", "right"]
-    for iconName in ["facebook", "mixi", "twipla", "tweetvite", "todai-jinrou", "jinraw","dummy", "plus"]
+    for iconName in ["facebook", "mixi", "twipla", "tweetvite", "todai-jinrou", "jinraw", "kokucheese","dummy", "plus"]
       $(".js-datepicker-#{pos}-icon-#{iconName}").each(()->
         kufu.cal.replaceBGImg($(this), pos, "icon-#{iconName}")
       )

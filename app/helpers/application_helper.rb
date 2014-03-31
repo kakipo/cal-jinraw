@@ -19,7 +19,7 @@ module ApplicationHelper
   def icon_type(url)
     host = URI.parse(url).host
     ret = "dummy"
-    ["facebook", "mixi", "twipla", "tweetvite","todai-jinrou", "jinraw"].each do |h|
+    ["facebook", "mixi", "twipla", "tweetvite","todai-jinrou", "jinraw", "kokucheese"].each do |h|
       if host.include?(h)
         ret = h
         break
