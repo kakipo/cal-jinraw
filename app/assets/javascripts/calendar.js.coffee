@@ -1,4 +1,4 @@
-  window.kufu = {}
+window.kufu = {}
 window.kufu.cal = {}
 
 kufu.IMG_BASE_URL = "assets"
