@@ -1,4 +1,4 @@
-window.kufu = {}
+  window.kufu = {}
 window.kufu.cal = {}
 
 kufu.IMG_BASE_URL = "assets"
@@ -46,7 +46,7 @@ kufu.cal.createIconClasses = ($eventDOMs) ->
 kufu.cal.setIcons = () ->
   # アイコンの設定
   for pos in ["left", "center", "right"]
-    for iconName in ["facebook", "mixi", "twipla", "tweetvite", "dummy", "plus"]
+    for iconName in ["facebook", "mixi", "twipla", "tweetvite", "todai-jinrou", "jinraw","dummy", "plus"]
       $(".js-datepicker-#{pos}-icon-#{iconName}").each(()->
         kufu.cal.replaceBGImg($(this), pos, "icon-#{iconName}")
       )

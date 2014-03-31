@@ -3,12 +3,12 @@ module ApplicationHelper
 
   def simple_date(dt)
     return if dt.blank?
-    dt.strftime("%Y-%m-%d(#{%w(日 月 火 水 木 金 土)[dt.wday]}) %H:%M") 
+    dt.strftime("%Y-%m-%d(#{%w(日 月 火 水 木 金 土)[dt.wday]}) %H:%M")
   end
 
   def simple_datetime(dt)
     return if dt.blank?
-    # dt.strftime("%Y-%m-%d(#{%w(日 月 火 水 木 金 土)[dt.wday]})") 
+    # dt.strftime("%Y-%m-%d(#{%w(日 月 火 水 木 金 土)[dt.wday]})")
     dt.strftime("%H:%M")
   end
 
@@ -19,7 +19,7 @@ module ApplicationHelper
   def icon_type(url)
     host = URI.parse(url).host
     ret = "dummy"
-    ["facebook", "mixi", "twipla", "tweetvite"].each do |h|
+    ["facebook", "mixi", "twipla", "tweetvite","todai-jinrou", "jinraw"].each do |h|
       if host.include?(h)
         ret = h
         break
